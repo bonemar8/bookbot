@@ -6,8 +6,9 @@ def main():
 
   word_count = count_words(book_content)
   
-  character_counts = count_characters(book_content)
-  print(character_counts)
+  character_count_dict = count_characters(book_content)
+  
+  print_report(character_count_dict, word_count)
 
 
 def read_text(path):
@@ -35,5 +36,15 @@ def count_characters(text):
       character_dict[lower_case] += 1
   return character_dict
 
+
+def print_report(character_dict, word_count):
+  print("--- Begin report of books/frankenstein.txt ---")
+  print(f"{word_count} words found in the document\n")
+
+  for character in dict(sorted(character_dict.items(), key=lambda item: item[1], reverse=True)):
+    if character.isalpha():
+      print(f"The '{character}' character was found {character_dict[character]} times")
+
+  print("--- End report ---")
 
 main()
